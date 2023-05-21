@@ -2,15 +2,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:offline/module/cart/cart_view.dart';
 import 'package:offline/module/counter_app/counter_cubit/counter_cubit.dart';
 import 'package:offline/module/counter_app/counter_cubit/counter_states.dart';
 
 class CounterView extends StatelessWidget {
   const CounterView({Key? key}) : super(key: key);
-
+  final int value = 0;
   @override
   Widget build(BuildContext context) {
- int value = 0;
+
 
 
 
@@ -25,6 +26,10 @@ class CounterView extends StatelessWidget {
           if( state is DecrementCounterState) {
             print('good day');
           }
+
+          /*if(state is IncrementCounterState) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => CartView()));
+          }*/
         },
         builder: (context,state) {
           CounterCubit cubit = CounterCubit.get(context);

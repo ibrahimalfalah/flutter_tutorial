@@ -6,11 +6,13 @@ import 'package:offline/shared/network/local/cache_helper.dart';
 import 'package:offline/shared/network/local/local_database.dart';
 
 import 'module/counter_app/counter_view.dart';
+import 'shared/network/remote/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await DatabaseHelper.createDatabase();
+  await DioHelper.init();
   runApp(const OfflineApp());
 }
 
@@ -20,8 +22,10 @@ class OfflineApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => CounterCubit()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
